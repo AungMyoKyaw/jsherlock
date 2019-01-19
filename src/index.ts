@@ -1,46 +1,52 @@
+import { sites as rawSites } from './data';
+import { checker } from './lib';
+
 //checking status mesasge interface
-interface message {
+interface Imessage {
   userName: string;
   siteName: string;
-  url: string;
+  uri: string;
   exist: false;
 }
 
 class JsherLock {
   private userName: string;
+  private sites: string[];
 
   constructor(userName: string) {
     this.userName = userName;
+    this.sites = new Array(...rawSites);
   }
 
-  static sites(): [string] {
-    return ['google'];
+  static sites(): string[] {
+    return rawSites;
   }
 
-  checkAll(): [message] {
-    return [
-      {
-        userName: this.userName,
-        siteName: 'siteName',
-        url: 'url',
-        exist: false
-      }
-    ];
+  async checkAll(): Promise<Imessage[]> {
+    const messages = await Promise.all(
+      rawSites.map(siteName => {
+        return new Promise<Imessage>(async (resolve, reject) => {
+          const message = await this.checkFor(siteName);
+          resolve(message);
+        });
+      })
+    );
+    return messages;
   }
 
-  checkFor(siteName: string): message {
-    return {
-      userName: this.userName,
-      siteName: siteName,
-      url: 'url',
-      exist: false
-    };
+  async checkFor(siteName: string): Promise<Imessage> {
+    try {
+      const message = await checker(siteName, this.userName);
+      return message;
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
 export default JsherLock;
 
-export { message };
+export { Imessage };
 
 module.exports = JsherLock;
 module.exports.default = JsherLock;

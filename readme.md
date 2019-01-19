@@ -76,8 +76,13 @@ const sites = checker.sites();
 
 - [ jsherlock-cli ][jsherlock-cli]
 
+## Inspired by
+
+- [sherlock][inspired-by]
+
 ## LICENSE
 
 MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
 
+[inspired-by]: https://github.com/TheYahya/sherlock
 [jsherlock-cli]: https://github.com/AungMyoKyaw/jsherlock-cli
