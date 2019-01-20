@@ -2,7 +2,7 @@
   "name": "jsherlock",
   "version": "0.0.1",
   "description": "Find usernames across social-networks",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register ./test/*.spec.ts -t 6e4 --exit",
