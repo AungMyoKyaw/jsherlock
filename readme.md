@@ -2,6 +2,12 @@
 
 > Find usernames across social networks
 
+[![Build Status][travis]][travis-url]
+[![code style: prettier][prettier]][prettier-url]
+[![npm][npm-download]][npm-dl-url]
+[![contributions welcome][contri]][contri-url]
+[![License: MIT][license]][license-url]
+
 ## Install
 
 ```shell
@@ -102,3 +108,13 @@ MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
 
 [inspired-by]: https://github.com/TheYahya/sherlock
 [jsherlock-cli]: https://github.com/AungMyoKyaw/jsherlock-cli
+[contri]: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square
+[contri-url]: https://github.com/AungMyoKyaw/jsherlock/issues
+[travis]: https://img.shields.io/travis/AungMyoKyaw/jsherlock/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/AungMyoKyaw/jsherlock
+[npm-download]: https://img.shields.io/npm/dt/jsherlock.svg?style=flat-square
+[npm-dl-url]: https://www.npmjs.com/package/jsherlock
+[license]: https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square
+[license-url]: https://opensource.org/licenses/MIT
+[prettier]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[prettier-url]: https://github.com/prettier/prettier
