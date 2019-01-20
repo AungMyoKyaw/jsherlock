@@ -5,19 +5,19 @@ import JsherLock from '../src/';
 import { Imessage } from '../src/';
 
 describe('JSHERLOCK', () => {
-  describe('CHECK_ALL', async () => {
+  it('SHOULD CHECK FOR ALL SUPPORTED SITES', async () => {
     const checker = new JsherLock('zuck');
     const status: Imessage[] = await checker.checkAll();
     assert.equal(status.length >= 1, true);
   });
 
-  describe('CHECK_FOR', async () => {
+  it('SHOULD CHECK FOR INDIVIDUAL SITE', async () => {
     const checker = new JsherLock('zuck');
     const status: Imessage = await checker.checkFor('Facebook');
     assert.equal([status].length == 1, true);
   });
 
-  describe('SITES', () => {
+  it('SHOULD RETURN SUPPORTED SITES', () => {
     const sites: string[] = JsherLock.sites();
     assert.equal(sites.length >= 1, true);
   });

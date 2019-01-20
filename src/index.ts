@@ -6,7 +6,7 @@ interface Imessage {
   userName: string;
   siteName: string;
   uri: string;
-  exist: false;
+  exist: boolean;
 }
 
 class JsherLock {
@@ -37,6 +37,7 @@ class JsherLock {
   async checkFor(siteName: string): Promise<Imessage> {
     try {
       const message = await checker(siteName, this.userName);
+      console.log(JSON.stringify(message, null, 2));
       return message;
     } catch (e) {
       throw e;

@@ -2,14 +2,12 @@
   "Instagram": {
     "url": "https://www.instagram.com/{}",
     "urlMain": "https://www.instagram.com/",
-    "errorType": "message",
-    "errorMsg": "The link you followed may be broken"
+    "errorType": "status_code"
   },
   "Twitter": {
     "url": "https://www.twitter.com/{}",
     "urlMain": "https://www.twitter.com/",
-    "errorType": "message",
-    "errorMsg": "page doesn’t exist"
+    "errorType": "status_code"
   },
   "Facebook": {
     "url": "https://www.facebook.com/{}",
@@ -20,8 +18,7 @@
   "YouTube": {
     "url": "https://www.youtube.com/{}",
     "urlMain": "https://www.youtube.com/",
-    "errorType": "message",
-    "errorMsg": "Not Found"
+    "errorType": "status_code"
   },
   "Blogger": {
     "url": "https://{}.blogspot.com",
@@ -37,8 +34,7 @@
   "Reddit": {
     "url": "https://www.reddit.com/user/{}",
     "urlMain": "https://www.reddit.com/",
-    "errorType": "message",
-    "errorMsg": "page not found"
+    "errorType": "status_code"
   },
   "Pinterest": {
     "url": "https://www.pinterest.com/{}",
@@ -61,7 +57,7 @@
   "Vimeo": {
     "url": "https://vimeo.com/{}",
     "urlMain": "https://vimeo.com/",
-    "errorType": "message",
+    "errorType": "status_code",
     "errorMsg": "404 Not Found"
   },
   "SoundCloud": {
