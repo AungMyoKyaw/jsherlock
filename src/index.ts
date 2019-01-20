@@ -37,7 +37,6 @@ class JsherLock {
   async checkFor(siteName: string): Promise<Imessage> {
     try {
       const message = await checker(siteName, this.userName);
-      console.log(JSON.stringify(message, null, 2));
       return message;
     } catch (e) {
       throw e;
