@@ -10,7 +10,7 @@ npm install jsherlock
 
 ## API
 
-- [ checkall ](#checkAll)
+- [ checkAll ](#checkAll)
 - [ checkFor ](#checkFor)
 - [ sites ](#sites)
 
@@ -25,7 +25,14 @@ import JsherLock from 'jsherlock';
 
 const checker = new JsherLock('username');
 
-const status = checker.checkAll();
+checker
+  .checkAll()
+  .then(status => {
+    console.log(status);
+  })
+  .catch(err => {
+    throw err;
+  });
 
 //=> [
 //=>   {
@@ -48,7 +55,14 @@ import JsherLock from 'jsherlock';
 
 const checker = new JsherLock('username');
 
-const status = checker.checkFor('site');
+checker
+  .checkFor('site')
+  .then(status => {
+    console.log(status);
+  })
+  .catch(err => {
+    throw err;
+  });
 
 //=>  {
 //=>    "userName": "username",
@@ -67,7 +81,9 @@ available sites
 ```javascript
 import JsherLock from 'jsherlock';
 
-const sites = checker.sites();
+const sites = JsherLock.sites();
+
+console.log(sites);
 
 //=>  ["site"]
 ```
