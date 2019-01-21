@@ -5,10 +5,17 @@ import { Imessage } from '../';
 
 const checker = (siteName: string, userName: string): Promise<Imessage> => {
   return new Promise<Imessage>(async (resolve, reject) => {
-    const site = siteInfo(siteName);
     let exist: boolean = true;
-    let uri: string = site.url.replace(/{}/gi, userName);
+    const site = siteInfo(siteName);
+    let uri: string = '';
     let statusCode, body, href;
+    //check url
+    try {
+      uri = site.url.replace(/{}/gi, userName);
+    } catch (e) {
+      reject(new Error('SITE IS NOT SUPPORTED YET'));
+    }
+
     try {
       let response = await request.get({
         uri,
