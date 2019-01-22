@@ -13,7 +13,7 @@ const checker = (siteName: string, userName: string): Promise<Imessage> => {
     try {
       uri = site.url.replace(/{}/gi, userName);
     } catch (e) {
-      reject(new Error('SITE IS NOT SUPPORTED YET'));
+      return reject(new Error('SITE IS NOT SUPPORTED YET'));
     }
 
     try {

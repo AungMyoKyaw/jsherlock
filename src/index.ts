@@ -24,23 +24,17 @@ class JsherLock {
 
   async checkAll(): Promise<Imessage[]> {
     const messages = await Promise.all(
-      rawSites.map(siteName => {
-        return new Promise<Imessage>(async (resolve, reject) => {
-          const message = await this.checkFor(siteName);
-          resolve(message);
-        });
+      rawSites.map(async siteName => {
+        const message = await this.checkFor(siteName);
+        return message;
       })
     );
     return messages;
   }
 
   async checkFor(siteName: string): Promise<Imessage> {
-    try {
-      const message = await checker(siteName, this.userName);
-      return message;
-    } catch (e) {
-      throw e;
-    }
+    const message = await checker(siteName, this.userName);
+    return message;
   }
 }
 
