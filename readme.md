@@ -27,9 +27,9 @@ check username availability across social networks
 ### Example
 
 ```javascript
-import JsherLock from 'jsherlock';
+import jsherlock from 'jsherlock';
 
-const checker = new JsherLock('username');
+const checker = new jsherlock('username');
 
 checker
   .checkAll()
@@ -37,7 +37,7 @@ checker
     console.log(status);
   })
   .catch(err => {
-    throw err;
+    console.log(err);
   });
 
 //=> [
@@ -57,9 +57,9 @@ check username availability for individual site
 ### Example
 
 ```javascript
-import JsherLock from 'jsherlock';
+import jsherlock from 'jsherlock';
 
-const checker = new JsherLock('username');
+const checker = new jsherlock('username');
 
 checker
   .checkFor('site')
@@ -67,7 +67,7 @@ checker
     console.log(status);
   })
   .catch(err => {
-    throw err;
+    console.log(err);
   });
 
 //=>  {
@@ -85,9 +85,9 @@ available sites
 ### Example
 
 ```javascript
-import JsherLock from 'jsherlock';
+import jsherlock from 'jsherlock';
 
-const sites = JsherLock.sites();
+const sites = jsherlock.sites();
 
 console.log(sites);
 
