@@ -44,7 +44,7 @@ checker
 //=>   {
 //=>     "userName": "username",
 //=>     "siteName": "siteName",
-//=>     "url": "url://url.url/username",
+//=>     "uri": "url://url.url/username",
 //=>     "exist": false
 //=>   }
 //=> ]
@@ -73,7 +73,7 @@ checker
 //=>  {
 //=>    "userName": "username",
 //=>    "siteName": "siteName",
-//=>    "url": "url://url.url/username",
+//=>    "uri": "url://url.url/username",
 //=>    "exist": false
 //=>  }
 ```
