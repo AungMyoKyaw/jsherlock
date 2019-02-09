@@ -29,7 +29,11 @@ const checker = async (siteName: string, userName: string) => {
       response.request.uri.href
     ];
   } catch (e) {
-    [statusCode, body] = [e.statusCode, e.body];
+    [statusCode, body, href] = [
+      e.response.statusCode,
+      e.response.body,
+      e.response.request.uri.href
+    ];
   }
 
   switch (site.errorType) {
