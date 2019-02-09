@@ -8,6 +8,7 @@ const checker = async (siteName: string, userName: string) => {
   const site = siteInfo(siteName);
   let uri: string = '';
   let statusCode, body, href;
+
   //check url
   try {
     uri = site.url.replace(/{}/gi, userName);
@@ -29,11 +30,7 @@ const checker = async (siteName: string, userName: string) => {
       response.request.uri.href
     ];
   } catch (e) {
-    [statusCode, body, href] = [
-      e.response.statusCode,
-      e.response.body,
-      e.response.request.uri.href
-    ];
+    [statusCode, body] = [e.statusCode, e.message];
   }
 
   switch (site.errorType) {
