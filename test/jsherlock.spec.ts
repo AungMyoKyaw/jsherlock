@@ -8,7 +8,6 @@ describe('JSHERLOCK', () => {
   it('SHOULD CHECK FOR ALL SUPPORTED SITES', async () => {
     const checker = new JsherLock('zuck');
     const status: Imessage[] = await checker.checkAll();
-    console.log(status);
     assert.equal(status.length >= 1, true);
   });
 
