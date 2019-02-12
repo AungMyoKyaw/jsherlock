@@ -5,54 +5,48 @@ import { Imessage } from '../';
 
 const checker = async (siteName: string, userName: string) => {
   let exist: boolean = true;
-  const site = siteInfo(siteName);
   let uri: string = '';
-  let statusCode, body, href;
-
-  //check url
   try {
+    const site = siteInfo(siteName);
+    let statusCode, body, href;
+
+    //check url
     uri = site.url.replace(/{}/gi, userName);
-  } catch (e) {
-    throw new Error('SITE IS NOT SUPPORTED YET');
-  }
 
-  try {
     let response = await request.get({
       uri,
       headers: {
         'User-Agent': UAstring
       },
-      resolveWithFullResponse: true
+      resolveWithFullResponse: true,
+      simple: false,
+      timeout: 20e3
     });
     [statusCode, body, href] = [
       response.statusCode,
       response.body,
       response.request.uri.href
     ];
-  } catch (e) {
-    [statusCode, body] = [e.statusCode, e.message];
-  }
 
-  switch (site.errorType) {
-    case 'status_code':
-      exist = statusCode != 404;
-      break;
-    case 'message':
-      try {
+    switch (site.errorType) {
+      case 'status_code':
+        exist = statusCode != 404;
+        break;
+      case 'message':
         const { errorMsg } = site;
         const errorMsgRegex = new RegExp(errorMsg, 'g');
         exist = !body.match(errorMsgRegex);
-      } catch (e) {}
-      break;
-    case 'response_url':
-      try {
+        break;
+      case 'response_url':
         const { errorUrl } = site;
         exist = href != errorUrl;
-      } catch (e) {}
-      break;
-    default:
-      exist = statusCode != 404;
-      break;
+        break;
+      default:
+        exist = statusCode != 404;
+        break;
+    }
+  } catch (e) {
+    exist = false;
   }
 
   return {
