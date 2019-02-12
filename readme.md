@@ -3,6 +3,7 @@
 > Find usernames across social networks
 
 [![Build Status][travis]][travis-url]
+[![install size][package-size]][package-size-url]
 [![code style: prettier][prettier]][prettier-url]
 [![npm][npm-download]][npm-dl-url]
 [![contributions welcome][contri]][contri-url]
@@ -118,3 +119,5 @@ MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
 [license-url]: https://opensource.org/licenses/MIT
 [prettier]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 [prettier-url]: https://github.com/prettier/prettier
+[package-size]: https://packagephobia.now.sh/badge?p=jsherlock@0.0.7
+[package-size-url]: https://packagephobia.now.sh/result?p=jsherlock@0.0.7
