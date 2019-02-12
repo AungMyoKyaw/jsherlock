@@ -1,31 +1,33 @@
-import * as request from 'request-promise-native';
+import axios from 'axios';
 
 import { UAstring, siteInfo } from '../data';
 import { Imessage } from '../';
 
 const checker = async (siteName: string, userName: string) => {
+  const site = siteInfo(siteName);
   let exist: boolean = true;
   let uri: string = '';
-  try {
-    const site = siteInfo(siteName);
-    let statusCode, body, href;
+  let response, statusCode, body, responseUrl;
 
+  try {
     //check url
     uri = site.url.replace(/{}/gi, userName);
 
-    let response = await request.get({
-      uri,
+    response = await axios({
+      method: 'get',
+      url: uri,
       headers: {
         'User-Agent': UAstring
       },
-      resolveWithFullResponse: true,
-      simple: false,
-      timeout: 20e3
+      validateStatus: status => {
+        return status ? true : false;
+      }
     });
-    [statusCode, body, href] = [
-      response.statusCode,
-      response.body,
-      response.request.uri.href
+
+    [statusCode, body, responseUrl] = [
+      response.status,
+      response.data,
+      response.request.res.responseUrl
     ];
 
     switch (site.errorType) {
@@ -35,11 +37,11 @@ const checker = async (siteName: string, userName: string) => {
       case 'message':
         const { errorMsg } = site;
         const errorMsgRegex = new RegExp(errorMsg, 'g');
-        exist = !body.match(errorMsgRegex);
+        exist = typeof body == 'string' ? !body.match(errorMsgRegex) : true;
         break;
       case 'response_url':
         const { errorUrl } = site;
-        exist = href != errorUrl;
+        exist = responseUrl != errorUrl;
         break;
       default:
         exist = statusCode != 404;
