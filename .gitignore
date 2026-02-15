@@ -51,14 +51,37 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# Yarn Integrity file
+# Yarn
 .yarn-integrity
+.yarn
+.pnp.*
 
 # dotenv environment variables file
 .env
+.env.local
+.env.*.local
 
 # next.js build output
 .next
 
 # typescript build
 dist/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Bun
+bun.lockb
+
+# Package manager lockfiles (keep only one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

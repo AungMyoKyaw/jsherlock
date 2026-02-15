@@ -1,18 +1,29 @@
 import raw from './data.json';
 
-interface IsiteInfo {
-  [index: string]: string;
+export type ErrorType = 'status_code' | 'message' | 'response_url';
+
+export interface ISiteInfo {
+  url: string;
+  urlMain: string;
+  errorType: ErrorType;
+  errorMsg?: string;
+  errorUrl?: string;
+  regexCheck?: string;
+  noPeriod?: string;
 }
 
-interface Idata {
-  [index: string]: IsiteInfo;
+export interface IData {
+  [siteName: string]: ISiteInfo;
 }
 
-const data: Idata = raw;
+const data: IData = raw;
 
-const sites: string[] = new Array(...Object.keys(data));
+const sites: string[] = Object.keys(data);
 
-const siteInfo = (siteName: string): IsiteInfo => {
+const siteInfo = (siteName: string): ISiteInfo => {
+  if (!data[siteName]) {
+    throw new Error(`Site "${siteName}" is not supported`);
+  }
   return data[siteName];
 };
 
