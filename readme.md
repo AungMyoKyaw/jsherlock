@@ -15,23 +15,103 @@
 npm install jsherlock
 ```
 
-## API
+Or using yarn:
 
-- [ checkAll ](#checkAll)
-- [ checkFor ](#checkFor)
-- [ sites ](#sites)
+```shell
+yarn add jsherlock
+```
 
-### checkAll
+## Usage
 
-check username availability across social networks
+### TypeScript
 
-### Example
+```typescript
+import JsherLock, { Imessage, SiteNotFoundError, NetworkError } from 'jsherlock';
+
+const checker = new JsherLock('username');
+
+try {
+  const results: Imessage[] = await checker.checkAll();
+  console.log(results);
+} catch (error) {
+  if (error instanceof SiteNotFoundError) {
+    console.error('Site not supported:', error.message);
+  } else if (error instanceof NetworkError) {
+    console.error('Network issue:', error.message);
+  }
+}
+```
+
+### JavaScript (ESM)
 
 ```javascript
-import jsherlock from 'jsherlock';
+import JsherLock from 'jsherlock';
 
-const checker = new jsherlock('username');
+const checker = new JsherLock('username');
+const results = await checker.checkAll();
+console.log(results);
+```
 
+### JavaScript (CommonJS)
+
+```javascript
+const JsherLock = require('jsherlock');
+
+const checker = new JsherLock('username');
+checker.checkAll().then(results => {
+  console.log(results);
+});
+```
+
+## API
+
+### `new JsherLock(username)`
+
+Creates a new JsherLock instance.
+
+- `username` (string, required): The username to search for across social networks.
+
+### `checkAll(): Promise<Imessage[]>`
+
+Check username availability across all supported social networks.
+
+Returns an array of results with the following structure:
+
+```typescript
+interface Imessage {
+  userName: string;   // The username searched
+  siteName: string;   // The social network name
+  uri: string;        // The profile URL
+  exist: boolean;     // Whether the username exists on this site
+}
+```
+
+### `checkFor(siteName: string): Promise<Imessage>`
+
+Check username availability for a specific site.
+
+- `siteName` (string): The name of the site to check (e.g., 'GitHub', 'Twitter')
+
+### `static sites(): string[]`
+
+Get a list of all supported sites.
+
+## Error Handling
+
+JsherLock provides custom error classes for better error handling:
+
+- `JsherLockError` - Base error class
+- `SiteNotFoundError` - Thrown when checking an unsupported site
+- `NetworkError` - Thrown when network requests fail
+
+## Example
+
+```javascript
+import JsherLock from 'jsherlock';
+
+const checker = new JsherLock('zuck');
+
+// Check all sites
 checker
   .checkAll()
   .then(status => {
@@ -43,27 +123,17 @@ checker
 
 //=> [
 //=>   {
-//=>     "userName": "username",
-//=>     "siteName": "siteName",
-//=>     "uri": "url://url.url/username",
-//=>     "exist": false
-//=>   }
+//=>     "userName": "zuck",
+//=>     "siteName": "Facebook",
+//=>     "uri": "https://www.facebook.com/zuck",
+//=>     "exist": true
+//=>   },
+//=>   ...
 //=> ]
-```
 
-### checkFor
-
-check username availability for individual site
-
-### Example
-
-```javascript
-import jsherlock from 'jsherlock';
-
-const checker = new jsherlock('username');
-
+// Check individual site
 checker
-  .checkFor('site')
+  .checkFor('GitHub')
   .then(status => {
     console.log(status);
   })
@@ -72,42 +142,77 @@ checker
   });
 
 //=>  {
-//=>    "userName": "username",
-//=>    "siteName": "siteName",
-//=>    "uri": "url://url.url/username",
+//=>    "userName": "zuck",
+//=>    "siteName": "GitHub",
+//=>    "uri": "https://www.github.com/zuck",
 //=>    "exist": false
 //=>  }
-```
 
-### sites
-
-available sites
-
-### Example
-
-```javascript
-import jsherlock from 'jsherlock';
-
-const sites = jsherlock.sites();
-
+// Get supported sites
+const sites = JsherLock.sites();
 console.log(sites);
 
-//=>  ["site"]
+//=>  ["Instagram", "Twitter", "Facebook", "GitHub", ...]
 ```
+
+## Supported Sites
+
+JSherLock supports over 100 social networks including:
+
+- Facebook, Twitter, Instagram
+- GitHub, GitLab, BitBucket
+- LinkedIn, Reddit, Medium
+- YouTube, Vimeo, Twitch
+- And many more...
+
+Use `JsherLock.sites()` to get the complete list.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Development
+
+```shell
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Build
+npm run build
+
+# Format code
+npm run format
+
+# Lint code
+npm run lint
+```
+
+## Requirements
+
+- Node.js >= 18
 
 ## Related
 
-- [ jsherlock-cli ][jsherlock-cli]
+- [jsherlock-cli][jsherlock-cli] - Command-line interface for JSherLock
 
 ## Inspired by
 
-- [sherlock][inspired-by]
+- [sherlock][inspired-by] - Hunt down social media accounts by username across social networks
 
-## LICENSE
+## License
 
 MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
 
-[inspired-by]: https://github.com/TheYahya/sherlock
+[inspired-by]: https://github.com/sherlock-project/sherlock
 [jsherlock-cli]: https://github.com/AungMyoKyaw/jsherlock-cli
 [contri]: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square
 [contri-url]: https://github.com/AungMyoKyaw/jsherlock/issues

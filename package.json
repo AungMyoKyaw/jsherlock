@@ -6,7 +6,10 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register ./test/*.spec.ts -t 6e4 --exit",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -14,7 +17,10 @@
   },
   "keywords": [
     "reconnaissance",
-    "information-gathering"
+    "information-gathering",
+    "username-checker",
+    "osint",
+    "social-media"
   ],
   "author": "Aung Myo Kyaw",
   "license": "MIT",
@@ -22,14 +28,18 @@
     "url": "https://github.com/AungMyoKyaw/jsherlock/issues"
   },
   "homepage": "https://github.com/AungMyoKyaw/jsherlock#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.18",
-    "mocha": "^5.2.0",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.4"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.5",
+    "mocha": "^11.1.2",
+    "prettier": "^3.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^1.13.5"
   }
 }

@@ -1,8 +1,9 @@
 import { sites as rawSites } from './data';
-import { checker } from './lib';
+import { checker, JsherLockError, SiteNotFoundError, NetworkError } from './lib';
 
-//checking status mesasge interface
-interface Imessage {
+export { JsherLockError, SiteNotFoundError, NetworkError };
+
+export interface Imessage {
   userName: string;
   siteName: string;
   uri: string;
@@ -14,12 +15,15 @@ class JsherLock {
   private sites: string[];
 
   constructor(userName: string) {
+    if (!userName || typeof userName !== 'string') {
+      throw new Error('Username must be a non-empty string');
+    }
     this.userName = userName;
-    this.sites = new Array(...rawSites);
+    this.sites = [...rawSites];
   }
 
   static sites(): string[] {
-    return rawSites;
+    return [...rawSites];
   }
 
   async checkAll(): Promise<Imessage[]> {
